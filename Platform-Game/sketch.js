@@ -38,7 +38,24 @@ const matrizInimigo = [
   [208, 626],
   [312, 626],
 ]
-    
+const matrizPersonagem = [
+      [0, 0],
+      [220, 0],
+      [440, 0],
+      [660, 0],
+      [0, 270],
+      [220, 270],
+      [440, 270],
+      [660, 270],
+      [0, 540],
+      [220, 540],
+      [440, 540],
+      [660, 540],
+      [0, 810],
+      [220, 810],
+      [440, 810],
+      [660, 810],
+    ] 
 function preload(){
   ImagemCenario = 
     loadImage('imagens/cenario/floresta.png');
@@ -54,20 +71,29 @@ function preload(){
 function setup() {//função setup: o que tem no jogo antes mesmo dele começar
   createCanvas(windowWidth, windowHeight);
     cenario = new Cenario(ImagemCenario, 3);
-    personagem = new Personagem(ImagemPersonagem);
+    personagem = new Personagem(matrizPersonagem, ImagemPersonagem, 0, 110, 135, 220, 270);
     inimigo = new Inimigo(matrizInimigo, ImagemInimigo, width-52, 52, 52, 104, 104);
     frameRate(40);
     musicaDoJogo.loop();
+}
+
+function keyPressed(){
+  if(key === 'ArrowUp'){
+    personagem.pula();
+  }
 }
 
 function draw() {//quando eu quero desenhar alguma coisa na tela, qualquer animação
   cenario.exibe();
   cenario.move();
   
+  personagem.exibe();
+  personagem.aplicaGravidade();
+  
   inimigo.exibe();
   inimigo.move();
   
-  personagem.exibe();
+  
   
 }
 
