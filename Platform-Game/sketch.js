@@ -1,6 +1,7 @@
 let ImagemCenario;
 let ImagemPersonagem;
 let ImagemInimigo;
+let SomDoPulo;
 
 let AlturaPersonagem;
 let cenario;
@@ -66,6 +67,7 @@ function preload(){
   
   AlturaPersonagem = 135;
   musicaDoJogo = loadSound('sons/trilha_jogo.mp3');
+  somDoPulo = loadSound('sons/Pulinho.mp3');
 }
 
 function setup() {//função setup: o que tem no jogo antes mesmo dele começar
@@ -80,6 +82,7 @@ function setup() {//função setup: o que tem no jogo antes mesmo dele começar
 function keyPressed(){
   if(key === 'ArrowUp'){
     personagem.pula();
+    somDoPulo.play();
   }
 }
 
@@ -93,8 +96,10 @@ function draw() {//quando eu quero desenhar alguma coisa na tela, qualquer anima
   inimigo.exibe();
   inimigo.move();
   
-  
-  
+  if (personagem.estaColidindo(inimigo)) {
+    console.log('colidiu')
+    noLoop()
+  }
 }
 
 
